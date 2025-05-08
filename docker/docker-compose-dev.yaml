@@ -1,0 +1,32 @@
+services:
+  #####################################################
+  #                   Mysql                           #
+  #####################################################
+  mysql:
+    image: mysql:lts
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql8_data:/var/lib/mysql
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/init-scripts/:/docker-entrypoint-initdb.d/
+    networks:
+      - app_network
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_general_ci"
+      - "--explicit_defaults_for_timestamp=true"
+      - "--lower_case_table_names=1"
+      - "--server-id=1"
+      - "--log-bin=mysql-bin"
+      - "--binlog-format=ROW"
+      - "--mysql_native_password=ON"
+
+networks:
+  app_network:
+
+volumes:
+  mysql8_data:

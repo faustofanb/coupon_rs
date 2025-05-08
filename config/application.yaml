@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+database:
+  url: "mysql://root:root@127.0.0.1:3306/coupon" # 替换为你的实际连接字符串
+  max_connections: 10
+  min_connections: 2
+  connect_timeout_seconds: 5
+  idle_timeout_seconds: 300 # 5 minutes
