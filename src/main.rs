@@ -1,4 +1,5 @@
 use crate::config::AppConfig;
+use crate::error::global_errors_handler::{ErrorHandler, PanicHandler};
 use crate::storage::dao::Database;
 use actix_web::{App, HttpServer, middleware, web};
 use log::info;
@@ -8,6 +9,7 @@ mod auth;
 mod common;
 mod config;
 mod controller;
+mod error;
 mod services;
 mod storage;
 mod transfer;
@@ -22,7 +24,6 @@ async fn main() -> std::io::Result<()> {
     info!("Load app configuration from config/application.yaml");
     let database = Database::new(&config.database).await;
     info!("Connect to database from url: {}", config.database.url);
-    info!("Server will start on port: {}", config.server.port);
 
     let app_state = web::Data::new(AppState {
         connections: Mutex::new(0),
@@ -32,6 +33,8 @@ async fn main() -> std::io::Result<()> {
     let app = HttpServer::new(move || {
         App::new()
             .app_data(app_state.clone())
+            // .wrap(PanicHandler)  //TODO: 解决崩溃问题
+            .wrap(ErrorHandler)
             .wrap(middleware::Logger::new(MIDDLEWARE_LOG_PATTERN))
             .configure(controller_init)
     })
