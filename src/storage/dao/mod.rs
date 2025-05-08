@@ -1,25 +1,31 @@
 pub mod template_dao;
 
-use std::marker::PhantomData;
-use std::sync::Arc;
-use actix_web::cookie::time::ext::NumericalStdDuration;
-use sqlx::{FromRow, MySqlPool};
-use sqlx::mysql::{MySqlPoolOptions, MySqlRow};
 use crate::config::DatabaseConfig;
 use crate::storage::entity::template_entity::TemplateDO;
+use actix_web::cookie::time::ext::NumericalStdDuration;
+use sqlx::mysql::{MySqlPoolOptions, MySqlRow};
+use sqlx::{FromRow, MySqlPool};
+use std::marker::PhantomData;
+use std::sync::Arc;
 
-pub struct Table<'c, T> where T: FromRow<'c, MySqlRow>{
-    pub pool: MySqlPool,
+pub struct Table<'c, T>
+where
+    T: FromRow<'c, MySqlRow>,
+{
+    pub pool: Arc<MySqlPool>,
     _from_row: fn(&'c MySqlRow) -> Result<T, sqlx::Error>,
-    _marker: PhantomData<&'c T>
+    _marker: PhantomData<&'c T>,
 }
 
-impl<'c, T> Table<'c, T> where T: FromRow<'c, MySqlRow> {
-    fn new(pool: MySqlPool) -> Self {
+impl<'c, T> Table<'c, T>
+where
+    T: FromRow<'c, MySqlRow>,
+{
+    fn new(pool: Arc<MySqlPool>) -> Self {
         Table {
             pool,
             _from_row: T::from_row,
-            _marker: PhantomData
+            _marker: PhantomData,
         }
     }
 }
@@ -63,11 +69,7 @@ impl<'c> Database<'c> {
             .expect("Failed to connect to database");
 
         Database {
-            template: Arc::from(Table::new(pool.clone())),
+            template: Arc::from(Table::new(Arc::new(pool).clone())),
         }
     }
 }
-
-
-
-

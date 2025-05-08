@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 10010
 
 database:
   url: "mysql://root:root@127.0.0.1:3306/coupon" # 替换为你的实际连接字符串

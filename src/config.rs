@@ -4,9 +4,13 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize, Clone)]
 pub struct AppConfig {
     pub database: DatabaseConfig,
+    pub server: ServerConfig,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct ServerConfig {
     #[serde(default = "default_server_port")]
-    pub server_port: u16, // 示例：其他应用配置
-    // pub log_level: String,
+    pub port: u16,
 }
 
 #[derive(Debug, Deserialize, Clone)] // Clone 可以方便传递
@@ -36,7 +40,8 @@ impl AppConfig {
         //    或者在运行时指定配置目录。
         //    为了简单起见，这里假设配置文件在 `config/` 目录下，
         //    并且程序从项目根目录运行（如使用 `cargo run`）。
-        settings = settings.add_source(config::File::with_name("config/application").required(true));
+        settings =
+            settings.add_source(config::File::with_name("config/application").required(true));
 
         // 2. 从特定环境配置文件加载 (例如 config/development.yaml)
         //    这会覆盖 default.yaml 中的值。
@@ -57,8 +62,18 @@ impl AppConfig {
 }
 
 // 默认值函数，如果配置文件中没有提供这些值
-fn default_server_port() -> u16 { 8080 }
-fn default_max_connections() -> u32 { 10 }
-fn default_min_connections() -> u32 { 1 } // sqlx 默认 min_connections 是 0，但通常设为1或更高
-fn default_connect_timeout() -> u64 { 5 } // 5 seconds
-fn default_idle_timeout() -> u64 { 600 } // 10 minutes, sqlx 默认
+fn default_server_port() -> u16 {
+    8080
+}
+fn default_max_connections() -> u32 {
+    10
+}
+fn default_min_connections() -> u32 {
+    1
+} // sqlx 默认 min_connections 是 0，但通常设为1或更高
+fn default_connect_timeout() -> u64 {
+    5
+} // 5 seconds
+fn default_idle_timeout() -> u64 {
+    600
+} // 10 minutes, sqlx 默认

@@ -1,4 +1,6 @@
+use crate::auth::SHOP_NUMBER;
 use crate::common::enums::{CouponSource, CouponStatus, CouponTarget, CouponType};
+use crate::transfer::request::template_req::TemplateSaveReqDto;
 use crate::util::datetime::serde_option_datetime_utc_as_gmt8_string;
 use chrono::{DateTime, NaiveDateTime, TimeZone, Utc};
 use serde::{Deserialize, Serialize};
@@ -78,16 +80,48 @@ impl<'r> FromRow<'r, MySqlRow> for TemplateDO {
             goods: row.try_get("goods")?,
             r#type: row.try_get("type")?,
 
-            valid_start_time: row.try_get::<Option<NaiveDateTime>, _>("valid_start_time").map(to_option_utc)?,
-            valid_end_time: row.try_get::<Option<NaiveDateTime>, _>("valid_end_time").map(to_option_utc)?,
+            valid_start_time: row
+                .try_get::<Option<NaiveDateTime>, _>("valid_start_time")
+                .map(to_option_utc)?,
+            valid_end_time: row
+                .try_get::<Option<NaiveDateTime>, _>("valid_end_time")
+                .map(to_option_utc)?,
             stock: row.try_get("stock")?,
             receive_rule: row.try_get("receive_rule")?,
             consume_rule: row.try_get("consume_rule")?,
             status: row.try_get("status")?,
-            create_time: row.try_get::<Option<NaiveDateTime>, _>("create_time").map(to_option_utc)?,
-            update_time: row.try_get::<Option<NaiveDateTime>, _>("update_time").map(to_option_utc)?,
+            create_time: row
+                .try_get::<Option<NaiveDateTime>, _>("create_time")
+                .map(to_option_utc)?,
+            update_time: row
+                .try_get::<Option<NaiveDateTime>, _>("update_time")
+                .map(to_option_utc)?,
             del_flag: row.try_get("del_flag")?,
         })
+    }
+}
+
+/// 从TemplateSaveReqDto到TemplateDO的转换实现
+impl From<TemplateSaveReqDto> for TemplateDO {
+    fn from(req: TemplateSaveReqDto) -> Self {
+        TemplateDO {
+            id: None,
+            shop_number: Some(SHOP_NUMBER), // 根据实际业务可能需要从其他地方获取
+            name: req.name.clone(),
+            source: req.source,
+            target: req.target,
+            goods: req.goods.clone(),
+            r#type: req.r#type,
+            valid_start_time: req.valid_start_time,
+            valid_end_time: req.valid_end_time,
+            stock: req.stock,
+            receive_rule: req.receive_rule.clone(),
+            consume_rule: req.consume_rule.clone(),
+            status: Some(CouponStatus::Active),
+            create_time: Some(Utc::now()),
+            update_time: Some(Utc::now()),
+            del_flag: Some(0),
+        }
     }
 }
 
@@ -96,9 +130,9 @@ impl<'r> FromRow<'r, MySqlRow> for TemplateDO {
 mod tests {
     use super::*;
     use crate::common::enums::{CouponSource, CouponStatus, CouponTarget, CouponType};
+    use crate::util::datetime::{FORMAT, gmt8_offset};
     use chrono::{Duration, NaiveDate, TimeZone, Utc};
     use serde_json;
-    use crate::util::datetime::{gmt8_offset, FORMAT};
     // --- JSON 序列化/反序列化测试 ---
 
     #[test]
@@ -112,16 +146,16 @@ mod tests {
             id: Some(101),
             shop_number: Some(202),
             name: Some("JSON测试优惠券".to_string()),
-            source: Some(CouponSource::Platform),   // 1
+            source: Some(CouponSource::Platform),  // 1
             target: Some(CouponTarget::StoreWide), // 1
             goods: None,
-            r#type: Some(CouponType::Discount),     // 2
+            r#type: Some(CouponType::Discount), // 2
             valid_start_time: Some(test_start_utc),
             valid_end_time: Some(test_end_utc),
             stock: Some(1000),
             receive_rule: Some("{\"limit\":1}".to_string()),
             consume_rule: Some("{\"min_spend\":100}".to_string()),
-            status: Some(CouponStatus::Active),     // 0
+            status: Some(CouponStatus::Active), // 0
             create_time: Some(test_create_utc),
             update_time: None,
             del_flag: Some(0),
@@ -133,7 +167,10 @@ mod tests {
 
         // 验证序列化结果 - 使用 camelCase
         assert!(json_string.contains(&format!("\"id\": {}", original_do.id.unwrap())));
-        assert!(json_string.contains(&format!("\"shopNumber\": {}", original_do.shop_number.unwrap())));
+        assert!(json_string.contains(&format!(
+            "\"shopNumber\": {}",
+            original_do.shop_number.unwrap()
+        )));
         assert!(json_string.contains("\"name\": \"JSON测试优惠券\""));
         assert!(json_string.contains(&format!("\"source\": {}", CouponSource::Platform as i32))); // 1
         assert!(json_string.contains(&format!("\"target\": {}", CouponTarget::StoreWide as i32))); // 1
@@ -142,13 +179,25 @@ mod tests {
         assert!(json_string.contains(&format!("\"status\": {}", CouponStatus::Active as i32))); // 0
 
         // 验证日期时间序列化为 GMT+8 字符串
-        let expected_start_gmt8_str = test_start_utc.with_timezone(&gmt8_offset()).format(FORMAT).to_string();
-        assert!(json_string.contains(&format!("\"validStartTime\": \"{}\"", expected_start_gmt8_str))); // camelCase key
+        let expected_start_gmt8_str = test_start_utc
+            .with_timezone(&gmt8_offset())
+            .format(FORMAT)
+            .to_string();
+        assert!(json_string.contains(&format!(
+            "\"validStartTime\": \"{}\"",
+            expected_start_gmt8_str
+        ))); // camelCase key
 
-        let expected_end_gmt8_str = test_end_utc.with_timezone(&gmt8_offset()).format(FORMAT).to_string();
-        assert!(json_string.contains(&format!("\"validEndTime\": \"{}\"", expected_end_gmt8_str)));   // camelCase key
+        let expected_end_gmt8_str = test_end_utc
+            .with_timezone(&gmt8_offset())
+            .format(FORMAT)
+            .to_string();
+        assert!(json_string.contains(&format!("\"validEndTime\": \"{}\"", expected_end_gmt8_str))); // camelCase key
 
-        let expected_create_gmt8_str = test_create_utc.with_timezone(&gmt8_offset()).format(FORMAT).to_string();
+        let expected_create_gmt8_str = test_create_utc
+            .with_timezone(&gmt8_offset())
+            .format(FORMAT)
+            .to_string();
         assert!(json_string.contains(&format!("\"createTime\": \"{}\"", expected_create_gmt8_str))); // camelCase key
 
         assert!(json_string.contains("\"updateTime\": null")); // camelCase key
@@ -162,7 +211,6 @@ mod tests {
         assert_eq!(deserialized_do.r#type, Some(CouponType::Discount));
         assert_eq!(deserialized_do.valid_start_time, Some(test_start_utc)); // 确保内部是 UTC
         assert_eq!(deserialized_do.update_time, None);
-
 
         // 测试从一个典型的 JSON payload 反序列化
         let input_json = r#"{
@@ -195,10 +243,16 @@ mod tests {
         assert_eq!(parsed_do.update_time, None);
 
         // 验证日期时间转换: "2024-08-01 09:30:00" (GMT+8) -> UTC
-        let expected_start_utc = gmt8_offset().from_local_datetime(
-            &NaiveDate::from_ymd_opt(2024, 8, 1).unwrap().and_hms_opt(9, 30, 0).unwrap()
-        ).single().unwrap().with_timezone(&Utc);
+        let expected_start_utc = gmt8_offset()
+            .from_local_datetime(
+                &NaiveDate::from_ymd_opt(2024, 8, 1)
+                    .unwrap()
+                    .and_hms_opt(9, 30, 0)
+                    .unwrap(),
+            )
+            .single()
+            .unwrap()
+            .with_timezone(&Utc);
         assert_eq!(parsed_do.valid_start_time, Some(expected_start_utc));
     }
-
 }
