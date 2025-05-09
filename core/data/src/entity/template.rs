@@ -1,11 +1,7 @@
-use crate::auth::SHOP_NUMBER;
-use crate::common::enums::{CouponSource, CouponStatus, CouponTarget, CouponType};
-use crate::transfer::request::template_req::TemplateSaveReqDto;
-use crate::util::datetime::serde_option_datetime_utc_as_gmt8_string;
-use chrono::{DateTime, NaiveDateTime, TimeZone, Utc};
+use chrono::{DateTime, Utc};
+use common::datetime::serde_option_datetime_utc_as_gmt8_string;
+use common::enums::{CouponSource, CouponStatus, CouponTarget, CouponType};
 use serde::{Deserialize, Serialize};
-use sqlx::mysql::MySqlRow;
-use sqlx::{Error as SqlxError, FromRow, Row};
 
 /// 优惠券模板数据对象
 #[derive(Serialize, Deserialize, Clone, Default, Debug, PartialEq)]
@@ -19,7 +15,6 @@ pub struct TemplateDO {
     pub name: Option<String>,
 
     /// 优惠券来源
-    // serde_repr 会处理 Option<Enum> 与 Option<i32> 之间的 JSON 转换
     pub source: Option<CouponSource>,
 
     /// 优惠对象
@@ -62,77 +57,12 @@ pub struct TemplateDO {
     pub del_flag: Option<i32>, // del_flag 保持 Option<i32>，或也可以转为 Option<bool> 并自定义处理
 }
 
-impl<'r> FromRow<'r, MySqlRow> for TemplateDO {
-    fn from_row(row: &'r MySqlRow) -> Result<Self, SqlxError> {
-        let to_option_utc = |opt_naive_dt: Option<NaiveDateTime>| {
-            opt_naive_dt.map(|naive_dt| Utc.from_utc_datetime(&naive_dt))
-        };
-
-        Ok(TemplateDO {
-            id: row.try_get("id")?,
-            shop_number: row.try_get("shop_number")?,
-            name: row.try_get("name")?,
-
-            // sqlx 会使用 #[sqlx(Type)] 和 #[repr(i32)] 来映射
-            // 如果数据库列是 NULL， try_get 会返回 Ok(None)
-            source: row.try_get("source")?,
-            target: row.try_get("target")?,
-            goods: row.try_get("goods")?,
-            r#type: row.try_get("type")?,
-
-            valid_start_time: row
-                .try_get::<Option<NaiveDateTime>, _>("valid_start_time")
-                .map(to_option_utc)?,
-            valid_end_time: row
-                .try_get::<Option<NaiveDateTime>, _>("valid_end_time")
-                .map(to_option_utc)?,
-            stock: row.try_get("stock")?,
-            receive_rule: row.try_get("receive_rule")?,
-            consume_rule: row.try_get("consume_rule")?,
-            status: row.try_get("status")?,
-            create_time: row
-                .try_get::<Option<NaiveDateTime>, _>("create_time")
-                .map(to_option_utc)?,
-            update_time: row
-                .try_get::<Option<NaiveDateTime>, _>("update_time")
-                .map(to_option_utc)?,
-            del_flag: row.try_get("del_flag")?,
-        })
-    }
-}
-
-/// 从TemplateSaveReqDto到TemplateDO的转换实现
-impl From<TemplateSaveReqDto> for TemplateDO {
-    fn from(req: TemplateSaveReqDto) -> Self {
-        TemplateDO {
-            id: None,
-            shop_number: Some(SHOP_NUMBER), // 根据实际业务可能需要从其他地方获取
-            name: req.name.clone(),
-            source: req.source,
-            target: req.target,
-            goods: req.goods.clone(),
-            r#type: req.r#type,
-            valid_start_time: req.valid_start_time,
-            valid_end_time: req.valid_end_time,
-            stock: req.stock,
-            receive_rule: req.receive_rule.clone(),
-            consume_rule: req.consume_rule.clone(),
-            status: Some(CouponStatus::Active),
-            create_time: Some(Utc::now()),
-            update_time: Some(Utc::now()),
-            del_flag: Some(0),
-        }
-    }
-}
-
 // --- 单元测试部分 ---
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::common::enums::{CouponSource, CouponStatus, CouponTarget, CouponType};
-    use crate::util::datetime::{FORMAT, gmt8_offset};
     use chrono::{Duration, NaiveDate, TimeZone, Utc};
-    use serde_json;
+    use common::datetime::{gmt8_offset, FORMAT};
     // --- JSON 序列化/反序列化测试 ---
 
     #[test]

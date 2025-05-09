@@ -1,7 +1,7 @@
+use common::datetime::serde_option_datetime_utc_as_gmt8_string;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use crate::common::enums::{CouponSource, CouponTarget, CouponType};
-use crate::util::datetime::serde_option_datetime_utc_as_gmt8_string;
+use common::enums::{CouponSource, CouponTarget, CouponType};
 
 /// 优惠券模板新增/保存请求 DTO
 #[derive(Serialize, Deserialize, Debug, Clone, Default, PartialEq)]

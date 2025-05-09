@@ -1,9 +1,8 @@
 use serde_repr::{Deserialize_repr, Serialize_repr};
-use sqlx::Type as SqlxType;
 
 // --- 优惠券来源 ---
-#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default, SqlxType)]
-#[repr(i32)] // 匹配数据库和 Kotlin Int? 的底层类型
+#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default)]
+#[repr(i32)]
 pub enum CouponSource {
     #[default]
     Shop = 0,     // 店铺券
@@ -11,7 +10,7 @@ pub enum CouponSource {
 }
 
 // --- 优惠对象 ---
-#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default, SqlxType)]
+#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default)]
 #[repr(i32)]
 pub enum CouponTarget {
     #[default]
@@ -20,7 +19,7 @@ pub enum CouponTarget {
 }
 
 // --- 优惠类型 ---
-#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default, SqlxType)]
+#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default)]
 #[repr(i32)]
 pub enum CouponType {
     #[default]
@@ -30,7 +29,7 @@ pub enum CouponType {
 }
 
 // --- 优惠券状态 ---
-#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default, SqlxType)]
+#[derive(Serialize_repr, Deserialize_repr, Clone, Debug, PartialEq, Default)]
 #[repr(i32)]
 pub enum CouponStatus {
     #[default]

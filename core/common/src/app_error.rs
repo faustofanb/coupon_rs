@@ -1,10 +1,10 @@
 use std::fmt;
 
-use actix_web::{HttpResponse, ResponseError, http::StatusCode};
+use actix_web::{http::StatusCode, HttpResponse, ResponseError};
 
 use crate::transfer::ResultVO;
 
-use super::error_code::{BaseErrorCode, ErrorCode};
+use super::error_code::ErrorCode;
 
 /// 统一异常类型
 #[derive(Debug)]
@@ -60,12 +60,6 @@ impl fmt::Display for AppError {
 }
 
 impl std::error::Error for AppError {}
-
-impl From<sqlx::Error> for AppError {
-    fn from(err: sqlx::Error) -> Self {
-        AppError::service(BaseErrorCode::ServiceError, Some(err.to_string()))
-    }
-}
 
 impl ResponseError for AppError {
     fn status_code(&self) -> StatusCode {

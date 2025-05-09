@@ -1,9 +1,15 @@
 [package]
 name = "coupon_rs"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+
+[workspace]
+members = [".", "core/*"]
 
 [dependencies]
+api = {path = "./core/api"}
+
+[workspace.dependencies]
 log4rs = { version = "1.3.0", features = ["gzip"] }
 log = "0.4.27"
 actix-web = "4.10.2"
@@ -16,5 +22,8 @@ sqlx = { version = "0.8.5", features = ["mysql", "runtime-tokio", "chrono"] }
 config = { version = "0.15.11", features = ["yaml"] }
 futures-util = "0.3.31"
 
-[dev-dependencies]
-mockall = "0.13.1"
+[profile.release]
+lto = true         # Link Time Optimization for smaller/faster binaries
+codegen-units = 1  # Optimize fully, slower build
+panic = 'abort'    # Smaller binary, assumes panics are unrecoverable bugs
+strip = true       # Strip symbols for smaller binary

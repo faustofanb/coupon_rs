@@ -1,0 +1,16 @@
+[package]
+name = "api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+common = { path = "../common" }
+services  = { path = "../services" }
+
+actix-web = "4.10.2"
+actix-rt = "2.10.0"
+futures-util = "0.3.31"
+sea-orm = { version = "^0.12.15", features = [ "sqlx-mysql", "runtime-async-std-native-tls", "macros" ]}
+
+log4rs = { version = "1.3.0", features = ["gzip"] }
+log = "0.4.27"

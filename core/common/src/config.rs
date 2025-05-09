@@ -28,27 +28,27 @@ pub struct DatabaseConfig {
 
 impl AppConfig {
     pub fn from_env() -> Result<Self, config::ConfigError> {
-        log4rs::init_file("config/log4rs.yaml", Default::default())
+        log4rs::init_file("log4rs.yaml", Default::default())
             .expect("Load log configuration failed.");
-        info!("Load log configuration from config/log4rs.yaml.");
+        info!("Load log configuration from /log4rs.yaml.");
         let mut settings = config::Config::builder();
 
-        // 1. 从默认配置文件加载 (config/default.yaml)
+        // 1. 从默认配置文件加载 (/default.yaml)
         //    路径是相对于可执行文件的。如果可执行文件在 target/debug/
-        //    而配置文件在项目根目录的 config/ 下，你需要调整路径或确保工作目录正确。
+        //    而配置文件在项目根目录的 / 下，你需要调整路径或确保工作目录正确。
         //    一个常见的做法是将配置文件放在与可执行文件相同的目录结构中，
         //    或者在运行时指定配置目录。
-        //    为了简单起见，这里假设配置文件在 `config/` 目录下，
+        //    为了简单起见，这里假设配置文件在 `/` 目录下，
         //    并且程序从项目根目录运行（如使用 `cargo run`）。
         settings =
-            settings.add_source(config::File::with_name("config/application").required(true));
+            settings.add_source(config::File::with_name("application").required(true));
 
         // 2. 从特定环境配置文件加载 (例如 config/development.yaml)
         //    这会覆盖 default.yaml 中的值。
         //    环境可以通过 RUN_MODE 环境变量设置 (config crate 默认行为)
         let run_mode = std::env::var("RUN_MODE").unwrap_or_else(|_| "dev".into());
         settings = settings.add_source(
-            config::File::with_name(&format!("config/application-{}", run_mode)).required(false),
+            config::File::with_name(&format!("application-{}", run_mode)).required(false),
         );
 
         // 3. 从环境变量加载 (例如 APP_DATABASE_URL)
