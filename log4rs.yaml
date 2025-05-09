@@ -1,11 +1,11 @@
 refresh_rate: 60 seconds
-  
+
 appenders:
   console_appender:
     kind: console
     target: stdout
     encoder:
-      pattern: "{d(%Y-%m-%d %H:%M:%S)} [{({l}):<5}] [{({T}):<15.15}] {({M}):<30.30}@{({L}):<4} >>> {m}{n}"
+      pattern: "{d(%Y-%m-%d %H:%M:%S)} [{({l}):<5}] [{({T}):<15.15}] {({M}):<30.30}@{({L}):<4} >>>>>>>>>> {m}{n}"
 
   http_requests_file:
     kind: rolling_file
@@ -23,17 +23,20 @@ appenders:
         base: 1
         count: 7
         pattern: "logs/http_requests.{}.log.gz"
-
-  file_appender:
-    kind: file
-    path: "logs/application.log"
-    append: true
+  sql_file:
+    kind: rolling_file
+    path: "logs/sql.log"
     encoder:
-      pattern: "{d} - {l} - {M} - {m}{n}"
-    filters:
-      - kind: threshold
-        level: info
-
+      pattern: "{d(%Y-%m-%d %H:%M:%S)} {m}{n}"
+    policy:
+      trigger:
+        kind: size
+        limit: 50 mb
+      roller:
+        kind: fixed_window
+        base: 1
+        count: 7
+        pattern: "logs/sql.{}.log.gz"
 loggers:
   actix_web::middleware:
     level: info # 只记录 info 级别的请求日志
@@ -41,9 +44,12 @@ loggers:
       - console_appender # 也输出到控制台
       - http_requests_file # 额外输出到专门的请求日志文件
     additive: false # false 表示这些日志不再传递给 root
-
+  sqlx::query: # 通常 SQL 语句日志来自 sqlx::query 模块
+    level: info # 设置为 info 以捕获所有 SQL 查询语句
+    appenders:
+      - sql_file
+    additive: false # 不再传递给 root
 root:
   level: info
   appenders:
     - console_appender
-  

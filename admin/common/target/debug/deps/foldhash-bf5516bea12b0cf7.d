@@ -1,0 +1,9 @@
+F:\Project\Rust\coupon_rs\common\target\debug\deps\libfoldhash-bf5516bea12b0cf7.rmeta: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\fast.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\quality.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\seed.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\convenience.rs
+
+F:\Project\Rust\coupon_rs\common\target\debug\deps\foldhash-bf5516bea12b0cf7.d: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\fast.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\quality.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\seed.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\convenience.rs
+
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\lib.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\fast.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\quality.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\seed.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\foldhash-0.1.5\src\convenience.rs:

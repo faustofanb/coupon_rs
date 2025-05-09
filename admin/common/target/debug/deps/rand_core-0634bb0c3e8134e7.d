@@ -1,0 +1,10 @@
+F:\Project\Rust\coupon_rs\common\target\debug\deps\librand_core-0634bb0c3e8134e7.rmeta: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\block.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\error.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\impls.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\le.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\os.rs
+
+F:\Project\Rust\coupon_rs\common\target\debug\deps\rand_core-0634bb0c3e8134e7.d: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\block.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\error.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\impls.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\le.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\os.rs
+
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\lib.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\block.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\error.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\impls.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\le.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\rand_core-0.6.4\src\os.rs:

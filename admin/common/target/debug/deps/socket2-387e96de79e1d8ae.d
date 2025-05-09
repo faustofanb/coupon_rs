@@ -1,0 +1,9 @@
+F:\Project\Rust\coupon_rs\common\target\debug\deps\libsocket2-387e96de79e1d8ae.rmeta: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sockaddr.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\socket.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sockref.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sys\windows.rs
+
+F:\Project\Rust\coupon_rs\common\target\debug\deps\socket2-387e96de79e1d8ae.d: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sockaddr.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\socket.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sockref.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sys\windows.rs
+
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\lib.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sockaddr.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\socket.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sockref.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\socket2-0.5.9\src\sys\windows.rs:

@@ -1,0 +1,9 @@
+F:\Project\Rust\coupon_rs\common\target\debug\deps\libderive_more-708ea8e4754c5e63.rmeta: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\as.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\mod.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\thiserror\mod.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\thiserror\aserror.rs
+
+F:\Project\Rust\coupon_rs\common\target\debug\deps\derive_more-708ea8e4754c5e63.d: C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\lib.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\as.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\mod.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\thiserror\mod.rs C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\thiserror\aserror.rs
+
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\lib.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\as.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\mod.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\thiserror\mod.rs:
+C:\Users\10962\.cargo\registry\src\mirrors.tuna.tsinghua.edu.cn-e791a3f93f26854f\derive_more-2.0.1\src\vendor\thiserror\aserror.rs:
